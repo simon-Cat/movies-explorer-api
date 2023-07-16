@@ -1,0 +1,20 @@
+{
+  "name": "movies-explorer-api",
+  "version": "1.0.0",
+  "description": "Backend for app",
+  "main": "app.js",
+  "scripts": {
+    "dev": "",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/simon-Cat/movies-explorer-api.git"
+  },
+  "author": "Bekir Murtazaev",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/simon-Cat/movies-explorer-api/issues"
+  },
+  "homepage": "https://github.com/simon-Cat/movies-explorer-api#readme"
+}
