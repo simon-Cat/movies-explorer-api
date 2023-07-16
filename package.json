@@ -4,8 +4,8 @@
   "description": "Backend for app",
   "main": "app.js",
   "scripts": {
-    "dev": "",
-    "start": "node app.js"
+    "dev": "nodemon index.js",
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/simon-Cat/movies-explorer-api/issues"
   },
-  "homepage": "https://github.com/simon-Cat/movies-explorer-api#readme"
+  "homepage": "https://github.com/simon-Cat/movies-explorer-api#readme",
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
 }
