@@ -19,5 +19,9 @@
   "homepage": "https://github.com/simon-Cat/movies-explorer-api#readme",
   "devDependencies": {
     "nodemon": "^3.0.1"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "mongoose": "^7.3.4"
   }
 }
