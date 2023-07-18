@@ -2,6 +2,8 @@
 const express = require('express');
 // include mongoose
 const mongoose = require('mongoose');
+// include routes "users" and "movies"
+const { users, movies } = require('./routes');
 
 // PORT
 const { PORT=3000 } = process.env;
@@ -9,11 +11,16 @@ const { PORT=3000 } = process.env;
 // Create server
 const app = express();
 
+// user routes
+app.use('/users', users);
+// movie routes
+app.use('/movies', movies);
+
 // Connect to mongo server
-mongoose.connect('mongodb://localhost:27017/bitfilmsdb',  {
+mongoose.connect('mongodb://127.0.0.1:27017/bitfilmsdb',  {
   useNewUrlParser: true,
-  useCreateIndex: true,
-  useFindAndModify: false
+  // useCreateIndex: true,
+  // useFindAndModify: false
 });
 
 // listen port
