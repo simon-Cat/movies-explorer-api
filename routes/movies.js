@@ -1,33 +1,15 @@
 // include Router
 const movies = require('express').Router();
+// include movie's controllers
+const { getMovies, addMovie, removeMovie } = require('../controllers/movies');
 
 // get - all user's movies
-movies.get('/movies', (req, res) => {
-  res.send([
-    {
-      title: 'Man in black',
-      year: 1997
-    },
-    {
-      title: 'Man in black II',
-      year: 2002
-    }
-  ]);
-});
+movies.get('/', getMovies);
 
 // post - add new movie
-movies.post('/movies', (req, res) => {
-  res.send({
-    title: 'Fast and Fourious',
-    year: 2001
-  })
-});
+movies.post('/', addMovie);
 
 // delete - remove movie
-movies.delete('/movies/_id', (req, res) => {
-  res.send({
-    text: "Movie was remove"
-  })
-})
+movies.delete('/:id', removeMovie)
 
 module.exports = movies;

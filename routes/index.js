@@ -5,4 +5,4 @@ const movies = require('./movies');
 
 // export users and movies
 module.exports.users = users;
-module.exports.movies;
+module.exports.movies = movies;

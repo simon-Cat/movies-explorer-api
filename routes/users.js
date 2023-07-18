@@ -1,20 +1,12 @@
 // include Router
 const users = require('express').Router();
+//  include user's controllers
+const { getUserInfo, updateUserInfo } = require('../controllers/users');
 
 // get user info (email and name)
-users.get('/users/me', (req, res) => {
-  res.send({
-    email: 'test@ya.ru',
-    name: 'Alex'
-  });
-});
+users.get('/me', getUserInfo);
 
 // patch user info (email and name)
-users.patch('/users/me', (req, res) => {
-  res.send({
-    email: 'new-test@ya.ru',
-    name: 'new name Ben'
-  })
-});
+users.patch('/me', updateUserInfo);
 
 module.exports = users;
