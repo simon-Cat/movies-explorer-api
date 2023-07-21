@@ -1,28 +1,78 @@
+// include movie model
+const Movie = require('../models/movie');
+// include Forbidden error, Not found error
+const { ForbiddenError, NotFoundError } = require('../errors');
+
 // get all movies
-module.exports.getMovies = (req, res) => {
-  res.send([
-    {
-      title: 'Man in black',
-      year: 1997
-    },
-    {
-      title: 'Man in black II',
-      year: 2002
-    }
-  ]);
+module.exports.getMovies = (req, res, next) => {
+  Movie.find({})
+  .populate('owner')
+  .then((movies) => {
+    res.send(movies);
+  })
+  .catch((err) => next(err));
 };
 
 // add new movie
 module.exports.addMovie = (req, res) => {
-  res.send({
-    title: 'Fast and Fourious',
-    year: 2001
-  });
+  const {
+    country,
+    director,
+    duration,
+    year,
+    description,
+    image,
+    trailerLink,
+    thumbnail,
+    movieId,
+    nameRU,
+    nameEN
+  } = req.body;
+
+  const ownerID = req.user._id;
+
+  Movie.create({
+    country,
+    director,
+    duration,
+    year,
+    description,
+    image,
+    trailerLink,
+    thumbnail,
+    movieId,
+    nameRU,
+    nameEN,
+    owner: ownerID,
+   })
+  .then((newMovie) => {
+    res.send(newMovie);
+  })
+  .catch((err) => next(err));
 };
 
 // remove movie
 module.exports.removeMovie = (req, res) => {
-  res.send({
-    text: "Movie was remove"
-  });
+  const { movieID } = req.params;
+  const userID = req.user._id;
+
+  Movie.findById(movieID)
+    .orFail()
+    .then((movie) => {
+      const ownerID = movie.owner._id;
+
+      if(!(ownerID.toString() === userID)) {
+        return next(new ForbiddenError('У вас нет прав для удаления избранных фильмов других пользователей'));
+      }
+
+      return movie.deleteOne()
+        .then(() => res.send({ message: `Фильм с id: ${movieID} успешно удален!` }));
+    })
+    .catch((err) => {
+      if(err instanceof Error.DocumentNotFoundError) {
+        next(new NotFoundError(`Фильм с id ${cardId} не найден`));
+      } else {
+        next(err);
+      }
+    });
 };
