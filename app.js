@@ -8,6 +8,11 @@ const { users, movies } = require('./routes');
 const { createUser, login } = require('./controllers/users');
 // include authorization middleware
 const auth = require('./middlewares/auth');
+// include "validateSignup" and "validateSignin"
+const { validateSignup, validateSignin } = require('./utils/requestValidation');
+// include celebrate errors
+const { errors } = require('celebrate');
+
 
 // PORT
 const { PORT=3000 } = process.env;
@@ -29,9 +34,9 @@ app.use(express.urlencoded({
 app.use(express.json());
 
 // post - register new user
-app.post('/signup', createUser);
+app.post('/signup', validateSignup(), createUser);
 // post - login user
-app.post('/signin', login);
+app.post('/signin', validateSignin(), login);
 
 // authorization middleware
 app.use(auth)
@@ -40,6 +45,13 @@ app.use(auth)
 app.use('/users', users);
 // movie routes
 app.use('/movies', movies);
+
+app.use(errors());
+
+// incorrect route error handler
+app.use((req, res, next) => {
+  next(new NotFoundError('Страница не найдена'));
+});
 
 // centralized error handler
 app.use((err, req, res, next) => {
