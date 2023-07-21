@@ -10,6 +10,6 @@ movies.get('/', getMovies);
 movies.post('/', addMovie);
 
 // delete - remove movie
-movies.delete('/:id', removeMovie)
+movies.delete('/:movieID', removeMovie)
 
 module.exports = movies;
