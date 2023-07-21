@@ -1,3 +1,5 @@
+// include Error Mongoose
+const { Error } = require('mongoose');
 // include user model
 const User = require('../models/user');
 // include bcryptjs
@@ -28,7 +30,7 @@ module.exports.getUserInfo = (req, res, next) => {
 };
 
 // update user info
-module.exports.updateUserInfo = (req, res) => {
+module.exports.updateUserInfo = (req, res, next) => {
   const { email, name } = req.body;
   const userID = req.user._id;
 
@@ -50,7 +52,8 @@ module.exports.updateUserInfo = (req, res) => {
 }
 
 // login
-module.exports.login = (req, res) => {
+module.exports.login = (req, res, next) => {
+  console.log('login');
   const { email, password } = req.body;
 
   return User.findUserByCredentials(email, password)
@@ -62,7 +65,7 @@ module.exports.login = (req, res) => {
 }
 
 // register
-module.exports.createUser = (req, res) => {
+module.exports.createUser = (req, res, next) => {
   const { email, name, password } = req.body;
 
   bcrypt.hash(password, 10)
