@@ -57,7 +57,7 @@ const movieSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-});
+}, { versionKey: false });
 
 // model for movie
 module.exports = mongoose.model('movie', movieSchema);
