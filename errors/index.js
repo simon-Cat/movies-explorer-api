@@ -4,10 +4,13 @@ const AuthorizationError = require('./authorization-error');
 const ForbiddenError = require('./forbidden-error');
 // Not found error
 const NotFoundError = require('./not-found-error');
+// Conflict error
+const ConflictError = require('./conflict-error');
 
 
 module.exports = {
   AuthorizationError,
   ForbiddenError,
-  NotFoundError
+  NotFoundError,
+  ConflictError,
 };
