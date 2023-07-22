@@ -12,6 +12,8 @@ const auth = require('./middlewares/auth');
 const { validateSignup, validateSignin } = require('./utils/requestValidation');
 // include celebrate errors
 const { errors } = require('celebrate');
+// include "requrestLogger", "errorLogger"
+const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 
 // PORT
@@ -33,6 +35,9 @@ app.use(express.urlencoded({
 }));
 app.use(express.json());
 
+// request logger
+app.use(requestLogger);
+
 // post - register new user
 app.post('/signup', validateSignup(), createUser);
 // post - login user
@@ -45,6 +50,9 @@ app.use(auth)
 app.use('/users', users);
 // movie routes
 app.use('/movies', movies);
+
+// error logger
+app.use(errorLogger);
 
 app.use(errors());
 
