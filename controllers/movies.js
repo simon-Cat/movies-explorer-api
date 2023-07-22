@@ -1,3 +1,5 @@
+// include Error Mongoose
+const { Error } = require("mongoose");
 // include movie model
 const Movie = require('../models/movie');
 // include Forbidden error, Not found error
@@ -14,7 +16,7 @@ module.exports.getMovies = (req, res, next) => {
 };
 
 // add new movie
-module.exports.addMovie = (req, res) => {
+module.exports.addMovie = (req, res, next) => {
   const {
     country,
     director,
@@ -52,7 +54,7 @@ module.exports.addMovie = (req, res) => {
 };
 
 // remove movie
-module.exports.removeMovie = (req, res) => {
+module.exports.removeMovie = (req, res, next) => {
   const { movieID } = req.params;
   const userID = req.user._id;
 
@@ -70,7 +72,7 @@ module.exports.removeMovie = (req, res) => {
     })
     .catch((err) => {
       if(err instanceof Error.DocumentNotFoundError) {
-        next(new NotFoundError(`Фильм с id ${cardId} не найден`));
+        next(new NotFoundError(`Фильм с id ${movieID} не найден`));
       } else {
         next(err);
       }
