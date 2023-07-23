@@ -14,6 +14,8 @@ const { validateSignup, validateSignin } = require('./utils/requestValidation');
 const { errors } = require('celebrate');
 // include "requrestLogger", "errorLogger"
 const { requestLogger, errorLogger } = require('./middlewares/logger');
+// include cors
+const cors = require('cors');
 
 
 // PORT
@@ -37,6 +39,14 @@ app.use(express.json());
 
 // request logger
 app.use(requestLogger);
+
+// cors
+app.use(cors({
+  origin: [
+    'https://murtazaev-movie-explorer.nomoredomains.xyz',
+    'http://murtazaev-movie-explorer.nomoredomains.xyz',
+  ],
+}));
 
 // post - register new user
 app.post('/signup', validateSignup(), createUser);
