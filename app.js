@@ -1,3 +1,5 @@
+// include dotenv
+require('dotenv').config();
 // include express
 const express = require('express');
 // include mongoose
@@ -25,7 +27,7 @@ const { PORT=3000 } = process.env;
 const app = express();
 
 // Connect to mongo server
-mongoose.connect('mongodb://127.0.0.1:27017/bitfilmsdb',  {
+mongoose.connect(`mongodb://127.0.0.1:27017/${process.env.MONGO_DB_NAME}`,  {
   useNewUrlParser: true,
   // useCreateIndex: true,
   // useFindAndModify: false
