@@ -3,7 +3,6 @@ const { celebrate, Segments, Joi } = require('celebrate');
 // include urlRegexp
 const urlRegexp = require('./urlRegexp');
 
-
 // signin
 module.exports.validateSignin = () => celebrate({
   [Segments.BODY]: Joi.object().keys({
@@ -49,6 +48,6 @@ module.exports.validateAddMovie = () => celebrate({
 // remove movie
 module.exports.validateRemoveMovie = () => celebrate({
   [Segments.PARAMS]: Joi.object().keys({
-    movieID:  Joi.string().hex().length(24).required(),
+    movieID: Joi.string().hex().length(24).required(),
   }),
 });

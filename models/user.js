@@ -16,8 +16,8 @@ const userSchema = mongoose.Schema({
     validate: {
       validator(v) {
         return validator.isEmail(v);
-      }
-    }
+      },
+    },
   },
   password: {
     type: String,
@@ -27,20 +27,20 @@ const userSchema = mongoose.Schema({
   name: {
     type: String,
     minLength: 2,
-    maxLength: 30
-  }
+    maxLength: 30,
+  },
 }, { versionKey: false });
 
 // static method "findUserByCredentials"
-userSchema.statics.findUserByCredentials = function(email, password) {
+userSchema.statics.findUserByCredentials = function (email, password) {
   return this.findOne({ email }).select('+password')
     .then((user) => {
-      if(!user) {
-        return Promise.reject(new AuthorizationError('Неправильные почта или пароль.'))
+      if (!user) {
+        return Promise.reject(new AuthorizationError('Неправильные почта или пароль.'));
       }
       return bcrypt.compare(password, user.password)
         .then((matched) => {
-          if(!matched) {
+          if (!matched) {
             return Promise.reject(new AuthorizationError('Неправильные почта или пароль.'));
           }
           return user;

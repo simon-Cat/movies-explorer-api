@@ -7,7 +7,6 @@ const NotFoundError = require('./not-found-error');
 // Conflict error
 const ConflictError = require('./conflict-error');
 
-
 module.exports = {
   AuthorizationError,
   ForbiddenError,

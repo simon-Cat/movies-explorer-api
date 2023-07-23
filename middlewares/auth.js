@@ -10,14 +10,14 @@ module.exports = (req, res, next) => {
   let payload = null;
 
   try {
-    if(!authorization || !authorization.startsWith('Bearer ')) {
+    if (!authorization || !authorization.startsWith('Bearer ')) {
       return next(new AuthorizationError('Необходима авторизация'));
     }
     const token = authorization.replace('Bearer ', '');
 
     payload = jwt.verify(token, NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret');
-  } catch(err) {
-    if(err.name === 'JsonWebTokenError' ) {
+  } catch (err) {
+    if (err.name === 'JsonWebTokenError') {
       next(new AuthorizationError('Необходима авторизация'));
     } else {
       next(err);
@@ -27,4 +27,4 @@ module.exports = (req, res, next) => {
   req.user = payload;
 
   return next();
-}
+};

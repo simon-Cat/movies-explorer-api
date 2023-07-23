@@ -1,14 +1,13 @@
 // include Error Mongoose
-const { Error } = require("mongoose");
-// include user model
-const User = require("../models/user");
+const { Error } = require('mongoose');
 // include bcryptjs
-const bcrypt = require("bcrypt");
+const bcrypt = require('bcrypt');
 // include jsonwebtoken
-const jwt = require("jsonwebtoken");
+const jwt = require('jsonwebtoken');
+// include user model
+const User = require('../models/user');
 // include Not found error, Conflict error
-const { NotFoundError, ConflictError } = require("../errors");
-
+const { NotFoundError, ConflictError } = require('../errors');
 
 // get user info
 module.exports.getUserInfo = (req, res, next) => {
@@ -59,8 +58,8 @@ module.exports.login = (req, res, next) => {
 
   return User.findUserByCredentials(email, password)
     .then((user) => {
-      const token = jwt.sign({ _id: user._id }, "some-secret-key", {
-        expiresIn: "7d",
+      const token = jwt.sign({ _id: user._id }, 'some-secret-key', {
+        expiresIn: '7d',
       });
       res.send({ token });
     })
@@ -87,7 +86,7 @@ module.exports.createUser = (req, res, next) => {
       .catch((err) => {
         if (err.code === 11000) {
           next(
-            new ConflictError("Пользователь с такими данными уже существует")
+            new ConflictError('Пользователь с такими данными уже существует'),
           );
         } else {
           next(err);

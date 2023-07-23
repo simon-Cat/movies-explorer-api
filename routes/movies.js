@@ -12,6 +12,6 @@ movies.get('/', getMovies);
 movies.post('/', validateAddMovie(), addMovie);
 
 // delete - remove movie
-movies.delete('/:movieID', validateRemoveMovie(), removeMovie)
+movies.delete('/:movieID', validateRemoveMovie(), removeMovie);
 
 module.exports = movies;

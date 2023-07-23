@@ -4,6 +4,10 @@ require('dotenv').config();
 const express = require('express');
 // include mongoose
 const mongoose = require('mongoose');
+// include celebrate errors
+const { errors } = require('celebrate');
+// include cors
+const cors = require('cors');
 // include routes "users" and "movies"
 const { users, movies } = require('./routes');
 // include createUser
@@ -12,22 +16,19 @@ const { createUser, login } = require('./controllers/users');
 const auth = require('./middlewares/auth');
 // include "validateSignup" and "validateSignin"
 const { validateSignup, validateSignin } = require('./utils/requestValidation');
-// include celebrate errors
-const { errors } = require('celebrate');
 // include "requrestLogger", "errorLogger"
 const { requestLogger, errorLogger } = require('./middlewares/logger');
-// include cors
-const cors = require('cors');
-
+// Not found error
+const { NotFoundError } = require('./errors');
 
 // PORT
-const { PORT=3000 } = process.env;
+const { PORT = 3000 } = process.env;
 
 // Create server
 const app = express();
 
 // Connect to mongo server
-mongoose.connect(`mongodb://127.0.0.1:27017/${process.env.MONGO_DB_NAME}`,  {
+mongoose.connect(`mongodb://127.0.0.1:27017/${process.env.MONGO_DB_NAME}`, {
   useNewUrlParser: true,
 });
 
@@ -54,7 +55,7 @@ app.post('/signup', validateSignup(), createUser);
 app.post('/signin', validateSignin(), login);
 
 // authorization middleware
-app.use(auth)
+app.use(auth);
 
 // user routes
 app.use('/users', users);
@@ -81,7 +82,6 @@ app.use((err, req, res, next) => {
 
   next();
 });
-
 
 // listen port
 app.listen(PORT, () => {

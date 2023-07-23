@@ -5,7 +5,6 @@ const { getUserInfo, updateUserInfo } = require('../controllers/users');
 // include "validateUpdateUserInfo"
 const { validateUpdateUserInfo } = require('../utils/requestValidation');
 
-
 // get - user info (email and name)
 users.get('/me', getUserInfo);
 
