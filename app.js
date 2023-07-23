@@ -29,8 +29,6 @@ const app = express();
 // Connect to mongo server
 mongoose.connect(`mongodb://127.0.0.1:27017/${process.env.MONGO_DB_NAME}`,  {
   useNewUrlParser: true,
-  // useCreateIndex: true,
-  // useFindAndModify: false
 });
 
 //  body parser middleware
@@ -88,4 +86,4 @@ app.use((err, req, res, next) => {
 // listen port
 app.listen(PORT, () => {
   console.log(`Listening port - ${PORT}`);
-})
+});
