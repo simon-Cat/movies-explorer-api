@@ -20,6 +20,8 @@ const { validateSignup, validateSignin } = require('./utils/requestValidation');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 // Not found error
 const { NotFoundError } = require('./errors');
+// include centralizedErrorHandler
+const centralizedErrorHandler = require('./utils/centralizedErrorHandler');
 
 // PORT
 const { PORT = 3000 } = process.env;
@@ -73,15 +75,7 @@ app.use((req, res, next) => {
 });
 
 // centralized error handler
-app.use((err, req, res, next) => {
-  const { statusCode = 500, message } = err;
-  res.status(statusCode).send({
-    err,
-    message: statusCode === 500 ? 'На сервере произошла ошибка' : message,
-  });
-
-  next();
-});
+app.use(centralizedErrorHandler);
 
 // listen port
 app.listen(PORT, () => {
