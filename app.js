@@ -10,6 +10,8 @@ const mongoose = require('mongoose');
 const { errors } = require('celebrate');
 // include cors
 const cors = require('cors');
+// include limiter
+const limiter = require('./middlewares/limiter');
 // include routes "users" and "movies"
 const { users, movies } = require('./routes');
 // include createUser
@@ -30,6 +32,9 @@ const { PORT = 3000 } = process.env;
 
 // Create server
 const app = express();
+
+// limiter
+app.use(limiter);
 
 // helmet
 app.use(helmet());
