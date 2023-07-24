@@ -2,6 +2,8 @@
 require('dotenv').config();
 // include express
 const express = require('express');
+// include helmet
+const helmet = require('helmet');
 // include mongoose
 const mongoose = require('mongoose');
 // include celebrate errors
@@ -28,6 +30,9 @@ const { PORT = 3000 } = process.env;
 
 // Create server
 const app = express();
+
+// helmet
+app.use(helmet());
 
 // Connect to mongo server
 mongoose.connect(`mongodb://127.0.0.1:27017/${process.env.MONGO_DB_NAME}`, {
