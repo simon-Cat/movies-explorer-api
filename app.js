@@ -33,9 +33,6 @@ const { PORT = 3000 } = process.env;
 // Create server
 const app = express();
 
-// limiter
-app.use(limiter);
-
 // helmet
 app.use(helmet());
 
@@ -52,6 +49,9 @@ app.use(express.json());
 
 // request logger
 app.use(requestLogger);
+
+// limiter
+app.use(limiter);
 
 // cors
 app.use(cors({
