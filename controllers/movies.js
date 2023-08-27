@@ -7,10 +7,13 @@ const { ForbiddenError, NotFoundError } = require('../errors');
 
 // get all movies
 module.exports.getMovies = (req, res, next) => {
+  const userID = req.user._id;
+
   Movie.find({})
     .populate('owner')
     .then((movies) => {
-      res.send(movies);
+      const currentUserMovies = movies.filter((movie) => movie.owner._id.valueOf() === userID);
+      res.send(currentUserMovies);
     })
     .catch((err) => next(err));
 };
