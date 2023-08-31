@@ -59,44 +59,6 @@ module.exports.updateUserInfo = (req, res, next) => {
         });
     }
   });
-
-  // User.findById(userID)
-  //   .orFail()
-  //   .then((user) => {
-  //     user
-  //       .updateOne({ email, name }, { new: true, runValidators: true })
-  //       .then(() => {
-  //         res.send({ email, name });
-  //       });
-  //   })
-  //   .catch((err) => {
-  //     if (err.code === 11000) {
-  //       next(new ConflictError('Пользователь с такими данными уже существует'));
-  //     } else if (err instanceof Error.DocumentNotFound) {
-  //       next(new NotFoundError(`Пользователь с id ${userID}с не найден`));
-  //     } else {
-  //       next(err);
-  //     }
-  //   });
-
-  // User.findById(userID)
-  //   .orFail()
-  //   .then((user) => {
-  //     user
-  //       .updateOne({ email, name }, { new: true, runValidators: true })
-  //       .then(() => {
-  //         res.send({ email, name });
-  //       });
-  //   })
-  //   .catch((err) => {
-  //     if (err.code === 11000) {
-  //       next(new ConflictError('Пользователь с такими данными уже существует'));
-  //     } else if (err instanceof Error.DocumentNotFound) {
-  //       next(new NotFoundError(`Пользователь с id ${userID}с не найден`));
-  //     } else {
-  //       next(err);
-  //     }
-  //   });
 };
 
 // login
