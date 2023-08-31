@@ -1,11 +1,10 @@
 // include mongoose
 const mongoose = require('mongoose');
-// include validator
-const validator = require('validator');
 // include bcryptjs
 const bcrypt = require('bcrypt');
 // Authorization error
 const { AuthorizationError } = require('../errors');
+const { emailRegExp } = require('../utils/regExp');
 
 // schema for user
 const userSchema = mongoose.Schema({
@@ -13,11 +12,7 @@ const userSchema = mongoose.Schema({
     type: String,
     required: true,
     unique: true,
-    validate: {
-      validator(v) {
-        return validator.isEmail(v);
-      },
-    },
+    match: emailRegExp,
   },
   password: {
     type: String,
