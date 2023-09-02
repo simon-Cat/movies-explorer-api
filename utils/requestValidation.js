@@ -1,7 +1,7 @@
 // include celebrate, Joi
 const { celebrate, Segments, Joi } = require('celebrate');
 // include urlRegexp
-const { urlRegexp, emailRegExp } = require('./regExp');
+const { urlRegExp, emailRegExp } = require('./regExp');
 
 // signin
 module.exports.validateSignin = () =>
@@ -40,9 +40,9 @@ module.exports.validateAddMovie = () =>
       duration: Joi.number().required(),
       year: Joi.string().required(),
       description: Joi.string().required(),
-      image: Joi.string().required().pattern(urlRegexp),
-      trailerLink: Joi.string().required().pattern(urlRegexp),
-      thumbnail: Joi.string().required().pattern(urlRegexp),
+      image: Joi.string().required().pattern(urlRegExp),
+      trailerLink: Joi.string().required().pattern(urlRegExp),
+      thumbnail: Joi.string().required().pattern(urlRegExp),
       movieId: Joi.number().required(),
       nameRU: Joi.string().required(),
       nameEN: Joi.string().required(),
