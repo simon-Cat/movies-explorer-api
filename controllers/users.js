@@ -36,29 +36,37 @@ module.exports.updateUserInfo = (req, res, next) => {
   const { email, name } = req.body;
   const userID = req.user._id;
 
-  User.find({}).then((users) => {
-    const isMailExist = users.some((user) => user.email === email);
-    if (isMailExist) {
-      next(new ConflictError('Пользователь с таким email уже существует'));
-    } else {
-      User.findById(userID)
-        .orFail()
-        .then((user) => {
-          user
-            .updateOne({ email, name }, { new: true, runValidators: true })
-            .then(() => {
-              res.send({ email, name });
-            });
-        })
-        .catch((err) => {
-          if (err instanceof Error.DocumentNotFound) {
-            next(new NotFoundError(`Пользователь с id ${userID}с не найден`));
+  User.findById(userID)
+    .orFail()
+    .then((currentUser) => {
+      if (currentUser.email === email) {
+        currentUser
+          .updateOne({ name }, { new: true, runValidators: true })
+          .then(() => {
+            res.send({ email: currentUser.email, name });
+          });
+      } else {
+        User.find({}).then((users) => {
+          const isMailExist = users.some((user) => user.email === email);
+          if (isMailExist && email !== currentUser.email) {
+            next(new ConflictError('Пользователь с таким email уже существует'));
           } else {
-            next(err);
+            currentUser
+              .updateOne({ name, email }, { new: true, runValidators: true })
+              .then(() => {
+                res.send({ email, name });
+              });
           }
         });
-    }
-  });
+      }
+    })
+    .catch((err) => {
+      if (err instanceof Error.DocumentNotFound) {
+        next(new NotFoundError(`Пользователь с id ${userID}с не найден`));
+      } else {
+        next(err);
+      }
+    });
 };
 
 // login
@@ -72,7 +80,7 @@ module.exports.login = (req, res, next) => {
         NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret',
         {
           expiresIn: '7d',
-        }
+        },
       );
       res.send({ token });
     })
@@ -98,9 +106,7 @@ module.exports.createUser = (req, res, next) => {
       })
       .catch((err) => {
         if (err.code === 11000) {
-          next(
-            new ConflictError('Пользователь с такими данными уже существует')
-          );
+          next(new ConflictError('Пользователь с такими данными уже существует'));
         } else {
           next(err);
         }
