@@ -10,7 +10,16 @@ Backend дипломного проекта по направлению "Веб-
 - добваление нового фильма
 - удаление существующего фильма
 
-## Ссылки на проект
-IP-адрес: 158.160.29.215
+## Используемые технологии
+<div>
+  <img src="https://raw.githubusercontent.com/devicons/devicon/55609aa5bd817ff167afce0d965585c92040787a/icons/nodejs/nodejs-original-wordmark.svg" alt="nodejs">
+  <img src="https://raw.githubusercontent.com/devicons/devicon/55609aa5bd817ff167afce0d965585c92040787a/icons/nginx/nginx-original.svg" alt="nginx">
+  <img src="https://raw.githubusercontent.com/devicons/devicon/55609aa5bd817ff167afce0d965585c92040787a/icons/express/express-original-wordmark.svg" alt="express">
+  <img src="https://raw.githubusercontent.com/devicons/devicon/55609aa5bd817ff167afce0d965585c92040787a/icons/mongodb/mongodb-original-wordmark.svg" alt="mongoDB">
+</div>
 
-Backend: [https://api.murtazaev-mesto.nomoredomains.monster](https://api.mb-movie-explorer.nomoredomains.xyz)https://api.mb-movie-explorer.nomoredomains.xyz
+## Ссылки на проект
+Сервис доступен по [ссылке](https://murtazaev-movie-explorer.nomoredomains.xyz/)
+
+## Frontend сервиса
+Frontend севриса расположен в [репозитории](https://github.com/simon-Cat/movies-explorer-frontend) 
