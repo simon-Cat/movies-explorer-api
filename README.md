@@ -12,7 +12,7 @@ Backend часть сервиса movies-explorer
 - добваление нового фильма
 - удаление существующего фильма
 
-## Используемые технологии
+## Стек
 <div>
   <img width="40" height="40" src="https://raw.githubusercontent.com/devicons/devicon/55609aa5bd817ff167afce0d965585c92040787a/icons/nodejs/nodejs-original-wordmark.svg" alt="nodejs" title="nodejs">
   <img width="40" height="40" src="https://raw.githubusercontent.com/devicons/devicon/55609aa5bd817ff167afce0d965585c92040787a/icons/nginx/nginx-original.svg" alt="nginx" title="nginx">
