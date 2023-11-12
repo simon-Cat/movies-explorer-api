@@ -21,8 +21,14 @@ Backend часть сервиса movies-explorer
   <img src="https://raw.githubusercontent.com/devicons/devicon/55609aa5bd817ff167afce0d965585c92040787a/icons/npm/npm-original-wordmark.svg" title="npm" alt="npm" width="40" height="40"/>&nbsp;
 </div>
 
-## Ссылки на проект
-Сервис доступен по [ссылке](https://murtazaev-movie-explorer.nomoredomains.xyz/)
+## Запуск проекта
+Требования:
+- Node.js v18.12.1
+  
+Шаги:
+- Склонируйте репозиторий
+- В коммандной строке введите команду npm install
+- После успешной устнаовки всех зависимостей введите команду npm run dev
 
 ## Frontend сервиса
 Frontend севриса расположен в [репозитории](https://github.com/simon-Cat/movies-explorer-frontend) 
